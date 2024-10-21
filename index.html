@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cuenta Regresiva</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #ffe3e3; /* Fondo rosado suave */
+            font-family: 'Arial', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            color: #333;
+        }
+
+        .container {
+            text-align: center;
+            background-color: #ffffff;
+            padding: 2em;
+            border-radius: 15px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            max-width: 500px;
+            width: 100%;
+        }
+
+        h1 {
+            color: #ff6b81; /* Título color rosado */
+            margin-bottom: 20px;
+        }
+
+        #countdown {
+            display: flex;
+            justify-content: space-around;
+            font-size: 2rem;
+            margin: 20px 0;
+            color: #ff4757;
+        }
+
+        #countdown div {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        #motivationalText {
+            margin-top: 20px;
+            font-size: 1.2rem;
+            color: #ff4757; /* Color rosado del texto */
+        }
+
+        .image-container {
+            margin-bottom: 20px;
+        }
+
+        #romanticImage {
+            width: 100%;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        #songLinkContainer {
+            margin-top: 20px;
+        }
+
+        #songLinkLabel {
+            font-size: 1.1rem;
+            color: #ff4757; /* Color rosado */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Cuenta Regresiva para Verte ❤️</h1>
+
+        <!-- Imagen romántica -->
+        <div class="image-container">
+            <img src="imagen1.jpg" alt="Una imagen especial" id="romanticImage">
+        </div>
+
+        <!-- Sección de cuenta regresiva -->
+        <div id="countdown">
+            <div><span id="days">0</span> Días</div>
+            <div><span id="hours">0</span> Horas</div>
+            <div><span id="minutes">0</span> Minutos</div>
+            <div><span id="seconds">0</span> Segundos</div>
+        </div>
+
+        <!-- Texto motivacional -->
+        <p id="motivationalText">¡Cada segundo que pasa, estamos más cerca! 💖</p>
+
+        <!-- Espacio para el link de una canción -->
+        <div id="songLinkContainer">
+            <label id="songLinkLabel" for="songLink">Escucha nuestra canción(Si es que no se escucha de fondo):</label><br>
+            <a id="songLink" href="https://www.youtube.com/watch?v=4NKhYkFAmUw" target="_blank">Reproducir Canción</a>
+        </div>
+
+        <!-- Audio que se reproduce automáticamente -->
+        <audio id="backgroundSong" src="https://drive.google.com/file/d/154IA2kzlhBHlaFfmuMpOL1VqFm80u35j/view?usp=sharing" autoplay loop></audio>
+    </div>
+
+    <script>
+        // Establece la fecha del reencuentro
+        const reencuentro = new Date("Dec 25, 2024 00:00:00").getTime();
+
+        // Función para actualizar la cuenta regresiva
+        const countdown = setInterval(function() {
+            const now = new Date().getTime();
+            const distance = reencuentro - now;
+
+            // Cálculo del tiempo restante
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            // Muestra los resultados en los spans
+            document.getElementById("days").innerHTML = days;
+            document.getElementById("hours").innerHTML = hours;
+            document.getElementById("minutes").innerHTML = minutes;
+            document.getElementById("seconds").innerHTML = seconds;
+
+            // Si la cuenta regresiva llega a cero
+            if (distance < 0) {
+                clearInterval(countdown);
+                document.getElementById("countdown").innerHTML = "¡Ya estamos juntos!";
+            }
+        }, 1000);
+
+        // Frases motivacionales
+        const frases = [
+            "Cada segundo que pasa, estamos más cerca. 💖",
+            "El amor a distancia tiene su magia. 🥰",
+            "Nuestro amor es más fuerte que la distancia. 💘",
+            "Ya casi te veo, nalgona preciosa. 😘",
+            "Ahí se ven los días que faltan para que te encuere 🙊"
+        ];
+
+        // Imágenes para cambiar
+        const imagenes = [
+            "imagen1.jpg",
+            "imagen2.jpg",
+            "imagen3.jpg",
+            "imagen4.jpg"
+        ];
+
+        // Cambia las frases e imágenes cada cierto tiempo
+        setInterval(function() {
+            // Cambiar frase
+            const fraseAleatoria = frases[Math.floor(Math.random() * frases.length)];
+            document.getElementById("motivationalText").innerHTML = fraseAleatoria;
+
+            // Cambiar imagen
+            const imagenAleatoria = imagenes[Math.floor(Math.random() * imagenes.length)];
+            document.getElementById("romanticImage").src = imagenAleatoria;
+        }, 5000);
+    </script>
+</body>
+</html>
